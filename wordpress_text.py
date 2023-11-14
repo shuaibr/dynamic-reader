@@ -30,13 +30,17 @@
 #     print(f"Request failed with status code: {response.status_code}")
 
 import requests
+import os
 
 api_url = 'https://reeyaz.ca/wp-json'
 token_url = f'{api_url}/jwt-auth/v1/token'
 
+WP_USER = os.getenv('WP_USER')
+WP_PASS = os.getenv('WP_PASS')
+
 data = {
-    'username': 'shuaibreeyaz@gmail.com',
-    'password': 'Heba2002!'
+    'username': WP_USER,
+    'password': WP_PASS
 }
 
 try:
