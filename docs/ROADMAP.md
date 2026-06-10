@@ -40,7 +40,10 @@ one captured feedback signal, happy path automated, go/no-go recorded here.
       checkpoint, robust planner JSON parsing, whole-finding truncation,
       token-usage printout per run
 - [ ] Run on 3–5 real Humaniti-style research questions; save outputs +
-      reviewer notes + token cost per run
+      reviewer notes + token cost per run. Make one of them a corpus/provenance
+      question for the Study Companion (workstream 5) — it does that
+      workstream's Phase-1 legwork and tests the Arabic floor on
+      classical-scholarship topics
 - [ ] Capture stakeholder feedback (program lead / grant writer review of one report)
 - [ ] Wire a free offline test into CI (live smoke test stays manual, pre-session)
 - [ ] **Go/no-go decision:** _pending_
@@ -76,6 +79,42 @@ When resumed, this workstream restarts at Phase 0 entry with its own validation 
 - `wordpress_text.py`: WordPress fetch experiment — deleted; the internal-docs
   ingestion idea is tracked as local document hybrid search (workstream 2).
 - All remain recoverable from git history.
+
+### 5. Classical Text Study Companion — GATED (opens on workstream 1 "go")
+
+Spec: [specs/sufi-text-companion-SPEC.md](specs/sufi-text-companion-SPEC.md).
+A study companion for classical Islamic texts: public-domain Arabic texts with
+vocabulary support, three-state annotations (machine-draft → community-reviewed →
+scholar-verified), and study-circle tools. Community corrections improve the corpus
+that teaches the next students. This is the truest descendant of the original
+Dynamic Reader vision.
+
+**Gate:** workstream 1's go/no-go must be recorded as "go" before any companion
+code is written. One operator means one Phase-1 validation at a time — running two
+halves the signal quality of both. The only pre-gate activity is the provenance
+research question folded into workstream 1's validation runs (free, and serves both).
+
+**On opening, in order:**
+
+- [ ] Extract the shared Arabic core (MSA query phrasing, source-evaluation skill,
+      Unicode/diacritics normalization) into one library consumed by both the
+      research agent and the companion — extract at two consumers, not before
+- [ ] Phase 1 per the spec's smallest closed loop: one short public-domain text,
+      machine glosses, weekly portion email to the operator's own study circle,
+      flag-a-gloss form, manual weekly corpus update; run for 4 circle sessions
+- [ ] Non-deferrable floors from day one: provenance doc per text, machine-assisted
+      labels with "not a fatwa / ask your teacher" notice, sensitive topics routed
+      to human review
+- [ ] **Kill criterion (record outcome here):** weekly active study sessions < 20
+      after 3 months
+- [ ] Loop-closes target: 25 paying subscribers or first institutional pilot
+
+### Workstream interaction rule
+
+Workstreams 1 and 5 share infrastructure (Arabic core, model tiering, principles)
+but never share a validation loop, kill criterion, or go/no-go decision. The
+research agent additionally serves workstream 5 as its corpus-building tool
+(provenance research, discussion-prompt background briefs).
 
 ## Repo-level engineering debt (from principles review)
 

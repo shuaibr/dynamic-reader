@@ -34,6 +34,10 @@ over-invest in code that hasn't earned it — and never under-invest in code tha
 - Throwaway code is allowed in Phase 0–1 but must be labeled as such (file header
   comment or `prototypes/` location) so agents and humans don't harden it by accident.
 
+**Closed-loop rule:** Phase 1 of every workstream ships the smallest *complete* loop —
+sense → decide → act → measure → improve — however small. Features that don't serve
+the loop are out of scope until the loop has run unattended for 7 days.
+
 **Phase 1 exit criteria (a feature is "validated" when):**
 
 1. It is deployed or demoable end-to-end to a real user or stakeholder.
@@ -94,8 +98,12 @@ never ratchets down.
   No Kubernetes, no multi-region, no premature queueing.
 - Capacity decisions are made when a measured bottleneck appears (§4), not
   speculatively.
+- Explicit budgets — max tokens per run, max API calls per provider per day, max
+  runtime per job — live in config, are enforced in code, and alert at 80%.
 - Token/API budget for LLM calls is tracked from the first integration — model usage
   is a capacity dimension like CPU or storage.
+- Model tiering: orchestration/synthesis on the frontier model, bulk extraction on
+  the cheapest adequate model; tier assignments live in config, never inline.
 
 ---
 
@@ -106,14 +114,14 @@ each has a concrete bar:
 
 | Area | Criteria |
 |------|----------|
-| **Decision making** | Decisions that shape architecture or product direction get a short written record (issue, PR description, or `docs/decisions/`). One sentence of context + the decision is enough in Phase 0–1. |
-| **Technical strategy** | The README's stated stack matches what's actually in the repo. Aspirational plans live under a clearly-labeled "Roadmap" heading, never presented as current state. |
+| **Decision making** | Decisions that shape architecture or product direction get a 5-line ADR in `docs/adr/` (context + decision; one sentence of each is enough in Phase 0–1). |
+| **Technical strategy** | Prefer boring tech; new external dependencies need an ADR. The README's stated stack matches what's actually in the repo. Aspirational plans live under a clearly-labeled "Roadmap" heading, never presented as current state. |
 | **Developer productivity** | A new contributor (human or agent) can go from clone → running app with the documented commands, with no tribal knowledge. Automation is preferred over toil: anything done manually 3+ times gets a script. |
 | **Organizational collaboration** | Transparency by default: work happens in branches and PRs, not local hoards. Code review is mentorship — review comments explain *why*. Blameless treatment of mistakes; postmortems focus on systems, not people. |
 | **Security** | Baseline (§5) always; hardening per phase (§2.3). |
 | **Code health** | Dead code is deleted, not commented out. Formatting/linting is automated once Phase 1 is reached so reviews discuss substance, not style. |
 | **Release hygiene** | `main` is always runnable. Every merge to `main` passes CI. Releases are tagged or otherwise identifiable. |
-| **Reliability** | Errors are handled and surfaced, not swallowed. Phase 2+ features have at least minimal logging for diagnosis. |
+| **Reliability** | Errors are handled and surfaced, not swallowed. Phase 2+ features have at least minimal logging for diagnosis; scheduled jobs get a heartbeat alert, and any silent failure lasting > 24h gets a blameless postmortem doc. |
 
 ---
 
