@@ -1,0 +1,24 @@
+# Model tiers — swap freely as new models ship
+models:
+  orchestrator: claude-fable-5            # planning, judging, final report
+  worker: claude-haiku-4-5-20251001      # bulk search + per-source summaries
+  compressor: claude-sonnet-4-6          # Arabic->English compression
+
+research:
+  max_search_rounds: 3        # orchestrator can loop: search -> assess gaps -> search again
+  queries_per_round: 4        # per language
+  language_weights:           # minimum share of sources per language in final report
+    ar: 0.4
+    en: 0.4
+    any: 0.2
+  max_sources: 25
+
+report:
+  format: markdown
+  citation_style: inline      # [1], [2] with a sources section
+  output_dir: outputs/
+  include_language_coverage_footer: true
+
+search:
+  provider: tavily            # or brave, serper — see src/search/web.py
+  results_per_query: 5

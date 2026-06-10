@@ -2,6 +2,8 @@
 
 **Status:** Foundational / living document
 **Applies to:** All agent-assisted and human development in this repository
+**Current application:** the active workstream is the [MENA Research Agent](../mena-research-agent/)
+(Phase 1 — validation); see [ROADMAP.md](ROADMAP.md) for planning and phase status.
 
 This document defines how we build with (and for) AI agents in this project. It is
 organized around one operating rule:
