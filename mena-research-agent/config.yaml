@@ -1,0 +1,20 @@
+# Model tiers — swap freely as new models ship
+models:
+  orchestrator: claude-fable-5            # planning, gap assessment, final report
+  worker: claude-haiku-4-5-20251001      # bulk search + per-source summaries
+
+research:
+  max_search_rounds: 3        # orchestrator can loop: search -> assess gaps -> search again
+  queries_per_round: 4        # per language
+  min_arabic_share: 0.4       # below this, gap assessment treats Arabic coverage as a gap
+  max_sources: 25             # stop collecting new sources after this many unique URLs
+
+report:
+  format: markdown
+  citation_style: inline      # [1], [2] with a sources section
+  output_dir: outputs/
+  include_language_coverage_footer: true
+
+search:
+  provider: tavily            # or brave, serper — see src/search/web.py
+  results_per_query: 5
