@@ -11,8 +11,6 @@ api_key = os.getenv("GPT_KEY")
 if api_key is None:
     raise EnvironmentError("API_KEY not found in the .env file")
 
-print(api_key)
-
 # Define a function to query book summaries
 def get_book_summary(book_name):
     # Prompt for ChatGPT
