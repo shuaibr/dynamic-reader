@@ -40,12 +40,13 @@ one captured feedback signal, happy path automated, go/no-go recorded here.
       checkpoint, robust planner JSON parsing, whole-finding truncation,
       token-usage printout per run
 - [ ] Run on 3–5 real Humaniti-style research questions; save outputs +
-      reviewer notes + token cost per run. Make one of them a corpus/provenance
-      question for the Study Companion (workstream 5) — it does that
-      workstream's Phase-1 legwork and tests the Arabic floor on
-      classical-scholarship topics
+      reviewer notes + token cost per run. Question set + run-log protocol:
+      [mena-research-agent/validation/QUESTIONS.md](../mena-research-agent/validation/QUESTIONS.md)
+      (Q5 is the Study Companion provenance question)
 - [ ] Capture stakeholder feedback (program lead / grant writer review of one report)
-- [ ] Wire a free offline test into CI (live smoke test stays manual, pre-session)
+- [x] Wire a free offline test into CI (3 stub-client tests in
+      `tests/test_offline.py`, run by `.github/workflows/ci.yml`; live smoke
+      test stays manual, pre-session)
 - [ ] **Go/no-go decision:** _pending_
 
 ### 2. Agent hardening & extension — Phase 2 (blocked on go decision)
@@ -121,4 +122,5 @@ research agent additionally serves workstream 5 as its corpus-building tool
 - [ ] Enable branch protection on `main` and GitHub secret scanning + push protection
 - [ ] Commit lockfiles (`package-lock.json` is currently gitignored — breaks
       reproducible builds and `npm audit`)
-- [ ] Minimal CI: lint + the agent smoke test on every push
+- [x] Minimal CI: compile check + offline agent tests on every push/PR
+      (`.github/workflows/ci.yml`); add a linter (ruff) when code churn warrants it
