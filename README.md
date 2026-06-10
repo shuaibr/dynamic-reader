@@ -22,8 +22,10 @@ See [docs/ROADMAP.md](docs/ROADMAP.md) for planning and
 | `mena-research-agent/` | **Active (Phase 1 — validation)** | Bilingual deep research agent. Start here. |
 | `docs/` | Active | Agent principles (spec) and roadmap (planning). |
 | `client/`, `server/` | On hold (Phase 0 scaffold) | Vite + React + Express boilerplate for the eventual reader UI. Hello-world only. |
-| `gpt.py`, `summary_prompt.txt` | Legacy prototype | Early book-summary experiment (uses a deprecated OpenAI API; non-functional). |
-| `wordpress_text.py` | Legacy prototype | WordPress content-fetch experiment. |
+
+Earlier prototypes (`gpt.py` book summaries, `wordpress_text.py` content fetch) were
+retired per the kill-or-fold rule in the principles doc; their ideas live on in the
+[roadmap](docs/ROADMAP.md) and they remain available in git history.
 
 ## Quick start (MENA Research Agent)
 

@@ -1,8 +1,10 @@
 # MENA Research Agent
 
-A bilingual (Arabic + English) deep research agent built on the **Claude Agent SDK**.
+A bilingual (Arabic + English) deep research agent built on **Claude**.
 Designed for humanitarian data research: it plans in English, searches in *both*
 languages, reads Arabic sources natively, and synthesizes a cited report.
+(It currently uses the raw Anthropic SDK; the orchestrator loop is structured
+for a later lift into the Claude Agent SDK — see the roadmap.)
 
 ## Why this architecture
 
@@ -15,7 +17,12 @@ English search queries, and a **tiered model strategy**:
 |---|---|---|
 | Orchestrator / planner / final synthesis | `claude-fable-5` | Best reasoning, long-horizon planning |
 | Bulk retrieval, summarizing each source | `claude-haiku-4-5-20251001` | Cheap + fast for high-volume work |
-| Arabic→English compression (optional) | `claude-sonnet-4-6` | Middle tier when Haiku quality isn't enough |
+
+The orchestrator's gap assessment enforces a configurable **minimum Arabic
+share** (`min_arabic_share` in `config.yaml`): if Arabic coverage falls below
+the floor, that is treated as a research gap and triggers another round
+targeting Arabic sources — the agent cannot quietly degrade into an
+English-only tool.
 
 ```
                  ┌──────────────────────────┐
@@ -27,9 +34,10 @@ English search queries, and a **tiered model strategy**:
    │ EN search worker │              │ AR search worker │
    │ (Haiku)          │              │ (Haiku)          │
    └────────┬────────┘              └─────────┬────────┘
+            │   per-source claims + citations │
             └──────────┐          ┌───────────┘
                  ┌─────▼──────────▼─────┐
-                 │ Compressor (Sonnet)  │  per-source summaries + citations
+                 │ Gap assessment (Fable)│  loops until covered (incl. AR floor)
                  └──────────┬───────────┘
                  ┌──────────▼───────────┐
                  │ Report writer (Fable)│  → outputs/report.md
@@ -43,9 +51,9 @@ mena-research-agent/
 ├── README.md
 ├── requirements.txt
 ├── .env.example
-├── config.yaml              # models, search depth, language weights
+├── config.yaml              # models, search depth, Arabic coverage floor
 ├── src/
-│   ├── agent.py             # entry point — Agent SDK orchestrator loop
+│   ├── agent.py             # entry point — orchestrator loop
 │   ├── query_expansion.py   # EN topic → parallel AR + EN search queries
 │   ├── search/
 │   │   └── web.py           # search provider wrapper (Tavily/Brave/etc.)
@@ -79,9 +87,11 @@ python -m src.agent "Water access trends in Yemen 2020-2026"
 2. **Every claim carries a source ID.** Workers return
    `{claim, source_url, lang, confidence}` tuples; the report writer refuses
    uncited claims. This matters for grant-grade Humaniti output.
-3. **Language coverage report.** The final report includes a footer showing
-   how many AR vs EN sources informed it — your built-in check that the
-   MENA data gap is actually being addressed, not reproduced.
+3. **Language coverage is enforced, then reported.** Gap assessment treats
+   Arabic coverage below `min_arabic_share` as a gap, and the final report
+   includes a footer showing how many AR vs EN sources informed it — your
+   built-in check that the MENA data gap is actually being addressed, not
+   reproduced.
 
 ## Roadmap ideas
 

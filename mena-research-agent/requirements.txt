@@ -1,5 +1,4 @@
 anthropic>=0.40
-claude-agent-sdk
 pyyaml
 httpx
 python-dotenv

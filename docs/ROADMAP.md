@@ -33,17 +33,23 @@ one captured feedback signal, happy path automated, go/no-go recorded here.
       per-source claim extraction → gap assessment loop → cited report
 - [x] Skills for Arabic source evaluation and Humaniti report format
 - [x] Smoke test for query expansion (gated on API key)
-- [ ] Run on 3–5 real Humaniti-style research questions; save outputs + reviewer notes
+- [x] Config honesty pass: Arabic floor (`min_arabic_share`) enforced in gap
+      assessment, `max_sources` cap + URL dedup enforced in the run loop,
+      unused `compressor` tier and `claude-agent-sdk` dependency removed
+- [x] Run survivability: API retries with backoff, per-round findings
+      checkpoint, robust planner JSON parsing, whole-finding truncation,
+      token-usage printout per run
+- [ ] Run on 3–5 real Humaniti-style research questions; save outputs +
+      reviewer notes + token cost per run
 - [ ] Capture stakeholder feedback (program lead / grant writer review of one report)
-- [ ] Implement or remove unused config: `language_weights`, `max_sources`,
-      `compressor` model (config must not promise what code doesn't do)
-- [ ] Wire the happy-path test into CI
+- [ ] Wire a free offline test into CI (live smoke test stays manual, pre-session)
 - [ ] **Go/no-go decision:** _pending_
 
 ### 2. Agent hardening & extension — Phase 2 (blocked on go decision)
 
 - [ ] Eval harness: 10 fixed questions, score citation accuracy per run
-- [ ] Deduplicate search hits across queries before summarizing (token capacity)
+- [ ] Prompt-injection hardening before the agent becomes callable by other
+      systems (MCP wrapper raises the blast radius)
 - [ ] Local document hybrid search (Humaniti internal docs + web)
 - [ ] MCP server wrapper so the agent is callable from Claude Code / other hosts
 - [ ] Urdu query expansion as a third language track
@@ -62,12 +68,14 @@ Original feature ideas (preserved for when this resumes):
 
 When resumed, this workstream restarts at Phase 0 entry with its own validation plan.
 
-### 4. Legacy prototypes — kill or fold in
+### 4. Legacy prototypes — RESOLVED (June 2026: deleted)
 
-- `gpt.py` + `summary_prompt.txt`: book-summary experiment on a sunset OpenAI API.
-  Decision due: rewrite as an agent skill, or delete.
-- `wordpress_text.py`: WordPress fetch experiment. Decision due: fold into local
-  document search (workstream 2) or delete.
+- `gpt.py` + `summary_prompt.txt`: book-summary experiment on a sunset OpenAI
+  API — deleted; the summary idea returns as an agent skill if/when the reader
+  platform resumes.
+- `wordpress_text.py`: WordPress fetch experiment — deleted; the internal-docs
+  ingestion idea is tracked as local document hybrid search (workstream 2).
+- All remain recoverable from git history.
 
 ## Repo-level engineering debt (from principles review)
 
