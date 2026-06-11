@@ -2,6 +2,32 @@
 
 **Status:** living document — updated when a go/no-go decision is made
 **Phase model:** see [AGENT_PRINCIPLES.md §1](AGENT_PRINCIPLES.md#1-operating-model-validation-before-optimization)
+**Portfolio governance:** [OPERATIONS.md](OPERATIONS.md) is binding (June 2026)
+
+## Portfolio context
+
+This repo hosts **two of the six portfolio projects**: **mena**
+(workstreams 1–2 — agent scaffold + briefs/paid-research product, spec:
+[specs/mena-briefs-SPEC.md](specs/mena-briefs-SPEC.md),
+[framework-alignment.md](framework-alignment.md)) and **maruf**
+(workstream 5 — spec: [specs/maruf-SPEC.md](specs/maruf-SPEC.md)).
+
+Operating rules that bind work here (see OPERATIONS.md for the full set):
+
+- **WIP cap = 1 across the portfolio; current Active: flow.** This repo is
+  *Passive* until rotation: automated runs, critical isolated bugfixes, and
+  completing the already-committed validation milestone only. New feature
+  work waits for the Active slot.
+- **Forced-choice outputs (Rule 1):** agent recommendations arrive as binary
+  choices with a one-line reason (mena brief sections: `PUBLISH / EDIT / CUT`),
+  never open-ended reports as the action interface. Vetoes append to `docs/codex.md`.
+- **AOR (Rule 4):** % of recommendations acted on within 48h, logged to
+  `metrics/loop_closure.csv`; < 50% over 2 weeks → demote to digest or mute.
+- **R2R (Rule 2):** every session close writes `reentry.md` at repo root.
+- **Single agent + schema + operator veto** — no multi-agent on this repo's
+  sequential pipelines (adversarial two-agent review is scoped to scout only).
+- **External validation only:** clean runs and friendly feedback don't count;
+  validation = a stranger subscribes, pays, or describes the problem unprompted.
 
 ## Direction (June 2026)
 
@@ -24,10 +50,19 @@ Rationale, mapped to our ecosystem lenses:
 
 ## Workstreams
 
-### 1. MENA Research Agent — Phase 1 (validation) — ACTIVE
+### 1. mena: Research Agent — Phase 1 (technical validation)
 
-Exit criteria (per principles §1): demoed end-to-end to a real stakeholder, at least
-one captured feedback signal, happy path automated, go/no-go recorded here.
+**Product layer (per [specs/mena-briefs-SPEC.md](specs/mena-briefs-SPEC.md)):**
+weekly bilingual brief + paid custom research, Humaniti as client zero.
+Loop closes on the **first paid external report** ($500–2,000 CAD); kill
+criterion: **no paid inquiry after 12 published briefs**. The smallest closed
+loop after technical validation: brief #1 to a 10-person list, ≥3 replies,
+country source-map skill committed.
+
+Technical-validation exit criteria (per principles §1): demoed end-to-end to a real
+stakeholder, at least one captured feedback signal, happy path automated, go/no-go
+recorded here. Note: per OPERATIONS.md these runs complete an already-committed
+milestone and are allowed while the repo is Passive.
 
 - [x] Working end-to-end pipeline: plan → bilingual query expansion → search →
       per-source claim extraction → gap assessment loop → cited report
@@ -49,8 +84,17 @@ one captured feedback signal, happy path automated, go/no-go recorded here.
       test stays manual, pre-session)
 - [ ] **Go/no-go decision:** _pending_
 
-### 2. Agent hardening & extension — Phase 2 (blocked on go decision)
+### 2. mena: briefs product + hardening — Phase 2 (blocked on go decision + Active slot)
 
+From [framework-alignment.md](framework-alignment.md) §3 and the mena spec:
+
+- [ ] Enforce §3 budgets in code: ≤45 min/run, ≤$5 CAD/brief, warn at 80%
+      (config keys exist for sources/rounds; $ and runtime are not yet enforced)
+- [ ] 20-claim golden set gating citation accuracy before any pipeline change
+- [ ] Brief pipeline on the scaffold (no fork drift): AR-delta box,
+      language-coverage gate banner, `PUBLISH / EDIT / CUT` per section
+- [ ] Adapters dir (`src/adapters/`): search, LLM, newsletter behind one file each
+- [ ] Ingest `research/inbox/<topic>/` dossiers as cited sources (tagged `gemini-dossier`)
 - [ ] Eval harness: 10 fixed questions, score citation accuracy per run
 - [ ] Prompt-injection hardening before the agent becomes callable by other
       systems (MCP wrapper raises the blast radius)
@@ -81,9 +125,11 @@ When resumed, this workstream restarts at Phase 0 entry with its own validation 
   ingestion idea is tracked as local document hybrid search (workstream 2).
 - All remain recoverable from git history.
 
-### 5. Classical Text Study Companion — GATED (opens on workstream 1 "go")
+### 5. maruf: Classical Text Study Companion — GATED (opens on workstream 1 "go" + Active slot)
 
-Spec: [specs/sufi-text-companion-SPEC.md](specs/sufi-text-companion-SPEC.md).
+Spec: [specs/maruf-SPEC.md](specs/maruf-SPEC.md) (v2, supersedes the
+sufi-text-companion spec; adds OPERATIONS alignment — forced-choice reviewer
+schema `ACCEPT FIX / REJECT / ESCALATE TO SCHOLAR`, AOR logging).
 A study companion for classical Islamic texts: public-domain Arabic texts with
 vocabulary support, three-state annotations (machine-draft → community-reviewed →
 scholar-verified), and study-circle tools. Community corrections improve the corpus
