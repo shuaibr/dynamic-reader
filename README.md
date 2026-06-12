@@ -12,8 +12,11 @@ directly attacks the biggest gap we found in knowledge access: English-only rese
 systematically misses the Arabic-language record (government data, regional NGOs,
 local journalism).
 
-See [docs/ROADMAP.md](docs/ROADMAP.md) for planning and
-[docs/AGENT_PRINCIPLES.md](docs/AGENT_PRINCIPLES.md) for how we build and validate.
+This repo hosts two projects of a six-project portfolio: **mena** (the research
+agent + briefs/paid-research product) and **maruf** (a gated classical-text study
+companion). See [docs/ROADMAP.md](docs/ROADMAP.md) for planning,
+[docs/AGENT_PRINCIPLES.md](docs/AGENT_PRINCIPLES.md) for how we build and validate,
+and [docs/OPERATIONS.md](docs/OPERATIONS.md) for the portfolio operating rules.
 
 ## What's in this repo
 

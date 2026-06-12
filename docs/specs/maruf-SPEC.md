@@ -1,10 +1,11 @@
-# SPEC — Classical Text Study Companion (sufi-text-companion)
+# SPEC — Maruf: Sufi & Classical Text Research Companion
 
-> **Workstream status: GATED** — does not open until the MENA Research Agent
-> go/no-go is recorded as "go" (see [ROADMAP.md](../ROADMAP.md), workstream 5).
-> Read alongside [AGENT_PRINCIPLES.md](../AGENT_PRINCIPLES.md). Scholarly
-> integrity outranks growth in every tradeoff; treat scholar review as a
-> non-deferrable floor, like baseline security.
+> **Workstream status: GATED** — does not open until mena's go/no-go is
+> recorded as "go" AND this repo holds the portfolio's Active slot
+> (see [OPERATIONS.md](../OPERATIONS.md) Rule 3 and [ROADMAP.md](../ROADMAP.md)
+> workstream 5). Read alongside [AGENT_PRINCIPLES.md](../AGENT_PRINCIPLES.md).
+> Scholarly integrity outranks growth in every tradeoff; treat scholar review
+> as a non-deferrable floor, like baseline security.
 
 ## Vision
 
@@ -85,6 +86,14 @@ students improve the corpus that teaches the next students.
   diacritics) in ONE shared library used everywhere.
 - Reliability: corpus integrity check in CI (no orphan annotations,
   no provenance-less texts).
+
+## Operations alignment (OPERATIONS.md governs)
+
+- **Action output:** forced-choice only (Rule 1) — schema in framework-alignment.md.
+- **Measure row = AOR** logged to `metrics/loop_closure.csv` (Rule 4).
+- **Coordination:** single agent + output schema + scholar review tier as the human gate.
+- Session hygiene: `reentry.md` on every stop (Rule 2); WIP cap (Rule 3) and
+  meta-work quarantine (Rule 5) apply.
 
 ## Phases
 
