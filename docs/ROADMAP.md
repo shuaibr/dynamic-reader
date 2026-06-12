@@ -168,5 +168,8 @@ research agent additionally serves workstream 5 as its corpus-building tool
 - [ ] Enable branch protection on `main` and GitHub secret scanning + push protection
 - [ ] Commit lockfiles (`package-lock.json` is currently gitignored — breaks
       reproducible builds and `npm audit`)
+- [ ] Triage the 4 Dependabot alerts (1 high) on the Node scaffold — fix or
+      consciously accept in writing when workstream 3 is touched; sooner if
+      the high-severity one is in a code path that could ever run
 - [x] Minimal CI: compile check + offline agent tests on every push/PR
       (`.github/workflows/ci.yml`); add a linter (ruff) when code churn warrants it
