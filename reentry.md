@@ -1,5 +1,6 @@
-LAST_COMPLETED: Spec pack v2 integrated — OPERATIONS.md, mena product spec,
-  framework-alignment, maruf rename, metrics/loop_closure.csv, research/inbox/
+LAST_COMPLETED: Repo debt cleared — lockfiles committed (root + client),
+  Dependabot alerts fixed (vite 7 upgrade, audit clean, build verified);
+  spec pack v2 integrated previously
 CURRENT_STOPPOINT: mena validation runs blocked — ANTHROPIC_API_KEY and
   TAVILY_API_KEY not yet set in the Claude Code environment (see
   mena-research-agent/validation/QUESTIONS.md for the run protocol)

@@ -166,10 +166,11 @@ research agent additionally serves workstream 5 as its corpus-building tool
 ## Repo-level engineering debt (from principles review)
 
 - [ ] Enable branch protection on `main` and GitHub secret scanning + push protection
-- [ ] Commit lockfiles (`package-lock.json` is currently gitignored — breaks
-      reproducible builds and `npm audit`)
-- [ ] Triage the 4 Dependabot alerts (1 high) on the Node scaffold — fix or
-      consciously accept in writing when workstream 3 is touched; sooner if
-      the high-severity one is in a code path that could ever run
+- [x] Commit lockfiles — `package-lock.json` un-gitignored and committed for
+      root + client (June 2026)
+- [x] Dependabot alerts triaged (June 2026): root resolves clean with a
+      lockfile (caret ranges pull patched versions); client high/moderate were
+      the vite ≤6 / esbuild chain — fixed by upgrading to vite 7 +
+      vite-plugin-svgr 4; production build verified; `npm audit` clean on both
 - [x] Minimal CI: compile check + offline agent tests on every push/PR
       (`.github/workflows/ci.yml`); add a linter (ruff) when code churn warrants it
